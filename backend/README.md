@@ -5,7 +5,7 @@ FastAPI service for Document Copilot. Env is read only through `app/config.py` (
 ## Prerequisites
 
 - [uv](https://docs.astral.sh/uv/) (installs and pins Python 3.12 for this project)
-- A `backend/.env` file with the required variables below
+- A `backend/.env` file with the required variables below (copy from `.env.example`)
 - Hosted Supabase project and an OpenAI API key
 
 Python itself does not need to be installed system-wide. From `backend/`:

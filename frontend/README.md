@@ -8,7 +8,7 @@ This is a browser SPA. Do not add Next.js, SSR, server components, or frontend r
 
 - Node.js 22+
 - [pnpm](https://pnpm.io) via Corepack (`corepack pnpm` if `pnpm` is not on PATH)
-- A `frontend/.env` file with the required variables below
+- A `frontend/.env` file with the required variables below (copy from `.env.example`)
 - Hosted Supabase project (anon / publishable key only)
 
 From `frontend/`:

@@ -46,8 +46,8 @@ Follow repo conventions in `AGENTS.md`, `backend/AGENTS.md`, and `frontend/AGENT
 
 ### Shared
 
-- [ ] Add example env files for both services (no secrets committed).
-- [ ] Confirm local frontend and backend start independently.
+- [x] Add example env files for both services (no secrets committed).
+- [x] Confirm local frontend and backend start independently.
 
 ---
 
