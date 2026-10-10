@@ -1,0 +1,15 @@
+# Secrets
+.env
+.env.*
+!.env.example
+!.env.local.example
+
+# Dependencies and build
+node_modules/
+dist/
+dist-ssr/
+*.local
+
+# Tooling
+.turbo/
+.cache/
