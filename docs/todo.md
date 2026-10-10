@@ -37,12 +37,12 @@ Follow repo conventions in `AGENTS.md`, `backend/AGENTS.md`, and `frontend/AGENT
 
 ### Frontend
 - [x] Create gitignore
-- [ ] Create `frontend/` as a Vite + React + TypeScript SPA (`pnpm` only).
-- [ ] Add React Router, Tailwind, shadcn/ui, `@supabase/supabase-js`, and Vercel AI SDK UI packages.
-- [ ] Add `src/lib/env.ts` that validates `VITE_API_BASE_URL`, `VITE_SUPABASE_URL`, `VITE_SUPABASE_ANON_KEY` at boot.
-- [ ] Never read `import.meta.env` outside `src/lib/env.ts`.
-- [ ] Do not introduce Next.js, SSR, server components, or frontend route handlers.
-- [ ] Add route shell: sign-in page and a placeholder chat page.
+- [x] Create `frontend/` as a Vite + React + TypeScript SPA (`pnpm` only).
+- [x] Add React Router, Tailwind, shadcn/ui, `@supabase/supabase-js`, and Vercel AI SDK UI packages.
+- [x] Add `src/lib/env.ts` that validates `VITE_API_BASE_URL`, `VITE_SUPABASE_URL`, `VITE_SUPABASE_ANON_KEY` at boot.
+- [x] Never read `import.meta.env` outside `src/lib/env.ts`.
+- [x] Do not introduce Next.js, SSR, server components, or frontend route handlers.
+- [x] Add route shell: sign-in page and a placeholder chat page.
 
 ### Shared
 
