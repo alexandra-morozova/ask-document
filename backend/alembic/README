@@ -1,0 +1,9 @@
+Alembic migrations for Document Copilot.
+
+`env.py` imports `Base.metadata` from `app.database.models` and reads
+`DATABASE_URL` from `app.config.get_settings()`. Run commands from `backend/`:
+
+```bash
+uv run alembic revision --autogenerate -m "<change>"
+uv run alembic upgrade head
+```

@@ -28,12 +28,12 @@ Follow repo conventions in `AGENTS.md`, `backend/AGENTS.md`, and `frontend/AGENT
 ### Backend
 - [x] Create gitignore
 - [x] Create `backend/` as a `uv` project (Python 3.12+).
-- [ ] Add FastAPI + Uvicorn, Pydantic v2, pydantic-settings, `httpx`, `structlog`, OpenAI SDK, Supabase Python client, SQLAlchemy, Alembic, PydanticAI, pytest, ruff.
-- [ ] Add `app/main.py` FastAPI entrypoint and `app/config.py` as the only env source of truth.
-- [ ] Fail fast on startup if required backend env is missing: `SUPABASE_URL`, `SUPABASE_ANON_KEY`, `SUPABASE_SERVICE_ROLE_KEY`, `DATABASE_URL`, `OPENAI_API_KEY`, `ALLOWED_ORIGINS`, embedding model name and dimensions.
-- [ ] Do not call `os.getenv` or `load_dotenv` in app code.
-- [ ] Add empty module layout: `api/`, `auth/`, `chat/`, `assistant/`, `retrieval/`, `grounding/`, `database/`, `ingest/`, `tests/`.
-- [ ] Create unit tests setup with Ruff 
+- [x] Add FastAPI + Uvicorn, Pydantic v2, pydantic-settings, `httpx`, `structlog`, OpenAI SDK, Supabase Python client, SQLAlchemy, Alembic, PydanticAI, pytest, ruff.
+- [x] Add `app/main.py` FastAPI entrypoint and `app/config.py` as the only env source of truth.
+- [x] Fail fast on startup if required backend env is missing: `SUPABASE_URL`, `SUPABASE_ANON_KEY`, `SUPABASE_SERVICE_ROLE_KEY`, `DATABASE_URL`, `OPENAI_API_KEY`, `ALLOWED_ORIGINS`, embedding model name and dimensions.
+- [x] Do not call `os.getenv` or `load_dotenv` in app code.
+- [x] Add empty module layout: `api/`, `auth/`, `chat/`, `assistant/`, `retrieval/`, `grounding/`, `database/`, `ingest/`, `tests/`.
+- [x] Create unit tests setup with Ruff 
 
 ### Frontend
 - [x] Create gitignore
@@ -55,25 +55,25 @@ Follow repo conventions in `AGENTS.md`, `backend/AGENTS.md`, and `frontend/AGENT
 
 Supabase is hosted Postgres. Alembic is the source of truth. Do not define tables only in the dashboard.
 
-- [ ] Add SQLAlchemy models in `backend/app/database/models.py` for:
-  - [ ] `profiles` (one row per `auth.users.id`)
-  - [ ] `chat_threads` (owner, title, timestamps)
-  - [ ] `chat_messages` (ordered user/assistant messages; store AI SDK-compatible JSON where useful)
-  - [ ] `message_citations` (normalized citations linked to assistant messages)
-  - [ ] `source_documents` (filing metadata, source URL, normalized Markdown)
-  - [ ] `document_chunks` (chunk text, index, page/section metadata, embedding, `tsvector`, token count, ticker/company/filing metadata JSON)
-- [ ] Configure Alembic (`alembic.ini`, `alembic/env.py`) to import app metadata.
-- [ ] Point Alembic at the Supabase **direct/session** `DATABASE_URL`, not the transaction pooler.
-- [ ] Generate, review, and apply the initial migration.
-- [ ] Add explicit migration operations that autogenerate cannot infer:
-  - [ ] `create extension if not exists vector`
-  - [ ] `vector(1536)` embedding column (or configured dimensions)
-  - [ ] generated `tsvector` column on `document_chunks`
-  - [ ] HNSW index for vector search
-  - [ ] GIN indexes for full-text search and JSON metadata
-  - [ ] RLS enablement and policies
-  - [ ] grants / Supabase role permissions
-- [ ] Commit models and the reviewed migration together.
+- [x] Add SQLAlchemy models in `backend/app/database/models/` for:
+  - [x] `users` (one row per `auth.users.id`)
+  - [x] `chat_threads` (owner, title, timestamps)
+  - [x] `chat_messages` (ordered user/assistant messages; store AI SDK-compatible JSON where useful)
+  - [x] `message_citations` (normalized citations linked to assistant messages)
+  - [x] `source_documents` (filing metadata, source URL, normalized Markdown)
+  - [x] `document_chunks` (chunk text, index, page/section metadata, embedding, `tsvector`, token count, ticker/company/filing metadata JSON)
+- [x] Configure Alembic (`alembic.ini`, `alembic/env.py`) to import app metadata.
+- [x] Point Alembic at the Supabase **direct/session** `DATABASE_URL`, not the transaction pooler.
+- [x] Generate, review, and apply the initial migration.
+- [x] Add explicit migration operations that autogenerate cannot infer:
+  - [x] `create extension if not exists vector`
+  - [x] `vector(1536)` embedding column (or configured dimensions)
+  - [x] generated `tsvector` column on `document_chunks`
+  - [x] HNSW index for vector search
+  - [x] GIN indexes for full-text search and JSON metadata
+  - [x] RLS enablement and policies
+  - [x] grants / Supabase role permissions
+- [x] Commit models and the reviewed migration together.
 
 ---
 
@@ -90,7 +90,7 @@ Login is Driftwood email via Supabase Auth. No SSO.
 - [ ] Create user-scoped and admin Supabase clients in `backend/app/database/supabase.py`.
 - [ ] Use the service-role key only on the backend, and only for privileged writes that still attach the authenticated `user_id`.
 - [ ] Ensure a user cannot read or write another user's threads (`403`).
-- [ ] Create/read `profiles` for the authenticated user.
+- [ ] Create/read `users` for the authenticated user.
 
 ---
 
