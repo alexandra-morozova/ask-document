@@ -81,16 +81,16 @@ Supabase is hosted Postgres. Alembic is the source of truth. Do not define table
 
 Login is Driftwood email via Supabase Auth. No SSO.
 
-- [ ] Create the browser Supabase client in `frontend/src/lib/supabase.ts` (anon key only).
-- [ ] Add email sign-in / sign-out UI. Session lives in `@supabase/supabase-js`.
-- [ ] Restrict signup/login to Driftwood email addresses if a domain allowlist is available; otherwise document the manual invite path for ~40 analysts.
-- [ ] Add `backend/app/auth/dependencies.py` that verifies `Authorization: Bearer <token>` by calling Supabase Auth's user endpoint.
-- [ ] Reject unauthenticated requests before retrieval or LLM work (`401`).
-- [ ] Derive `user_id` and email from the verified user.
-- [ ] Create user-scoped and admin Supabase clients in `backend/app/database/supabase.py`.
-- [ ] Use the service-role key only on the backend, and only for privileged writes that still attach the authenticated `user_id`.
-- [ ] Ensure a user cannot read or write another user's threads (`403`).
-- [ ] Create/read `users` for the authenticated user.
+- [x] Create the browser Supabase client in `frontend/src/lib/supabase.ts` (anon key only).
+- [x] Add email sign-in / sign-out UI. Session lives in `@supabase/supabase-js`.
+- [x] Restrict signup/login to Driftwood email addresses if a domain allowlist is available; otherwise document the manual invite path for ~40 analysts.
+- [x] Add `backend/app/auth/dependencies.py` that verifies `Authorization: Bearer <token>` by calling Supabase Auth's user endpoint.
+- [x] Reject unauthenticated requests before retrieval or LLM work (`401`).
+- [x] Derive `user_id` and email from the verified user.
+- [x] Create user-scoped and admin Supabase clients in `backend/app/database/supabase.py`.
+- [x] Use the service-role key only on the backend, and only for privileged writes that still attach the authenticated `user_id`.
+- [x] Ensure a user cannot read or write another user's threads (`403`).
+- [x] Create/read `users` for the authenticated user.
 
 ---
 

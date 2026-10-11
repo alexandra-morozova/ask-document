@@ -21,6 +21,7 @@ class Settings(BaseSettings):
     database_url: str
     openai_api_key: str
     allowed_origins: Annotated[list[str], NoDecode]
+    allowed_email_domain: str | None = None
     openai_embedding_model: str
     openai_embedding_dimensions: int
 
@@ -29,6 +30,16 @@ class Settings(BaseSettings):
     def split_origins(cls, value: object) -> object:
         if isinstance(value, str):
             return [item.strip() for item in value.split(",") if item.strip()]
+        return value
+
+    @field_validator("allowed_email_domain", mode="before")
+    @classmethod
+    def normalize_email_domain(cls, value: object) -> object:
+        if value is None or value == "":
+            return None
+        if isinstance(value, str):
+            domain = value.strip().lstrip("@").lower()
+            return domain or None
         return value
 
 
