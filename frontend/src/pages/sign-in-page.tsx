@@ -1,11 +1,49 @@
-import { type FormEvent } from "react";
-import { Link } from "react-router-dom";
+import { type FormEvent, useState } from "react";
+import { Navigate } from "react-router-dom";
 
 import { Button } from "@/components/ui/button";
+import { useSession } from "@/hooks/use-session";
+import { isAllowedEmail } from "@/lib/email";
+import { env } from "@/lib/env";
+import { supabase } from "@/lib/supabase";
 
 export function SignInPage() {
-  function onSubmit(event: FormEvent<HTMLFormElement>) {
+  const session = useSession();
+  const [error, setError] = useState<string | null>(null);
+  const [pending, setPending] = useState(false);
+
+  async function onSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
+    const form = new FormData(event.currentTarget);
+    const email = String(form.get("email") ?? "");
+    const password = String(form.get("password") ?? "");
+
+    if (!isAllowedEmail(email, env.allowedEmailDomain)) {
+      setError("Use your Driftwood email.");
+      return;
+    }
+
+    setPending(true);
+    setError(null);
+    const { error: signInError } = await supabase.auth.signInWithPassword({
+      email,
+      password,
+    });
+    setPending(false);
+
+    if (signInError) {
+      setError("Could not sign in. Check your email and password.");
+    }
+  }
+
+  if (session === undefined) {
+    return (
+      <main className="p-8 text-sm text-muted-foreground">Loading…</main>
+    );
+  }
+
+  if (session) {
+    return <Navigate to="/chat" replace />;
   }
 
   return (
@@ -13,7 +51,7 @@ export function SignInPage() {
       <div className="space-y-1">
         <h1 className="text-2xl font-medium">Sign in</h1>
         <p className="text-sm text-muted-foreground">
-          Driftwood email. Auth is wired in the next phase.
+          Use your Driftwood email.
         </p>
       </div>
       <form className="flex flex-col gap-4" onSubmit={onSubmit}>
@@ -37,13 +75,11 @@ export function SignInPage() {
             required
           />
         </label>
-        <Button type="submit">Sign in</Button>
+        {error ? <p className="text-sm text-destructive">{error}</p> : null}
+        <Button type="submit" disabled={pending}>
+          {pending ? "Signing in…" : "Sign in"}
+        </Button>
       </form>
-      <p className="text-sm text-muted-foreground">
-        <Link className="underline-offset-4 hover:underline" to="/chat">
-          Open placeholder chat
-        </Link>
-      </p>
     </main>
   );
 }
